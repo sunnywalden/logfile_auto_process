@@ -20,7 +20,7 @@ client=MongoClient(host, port)
 
 db=client.migu_video
 
-def check_status(searchid):
+def get_status(searchid):
     if searchid:
         cursor = db.program.find({'searchId':searchid},{'_id':0,'active':1})
         for search_res in cursor:

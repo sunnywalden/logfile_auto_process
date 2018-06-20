@@ -3,8 +3,9 @@
 
 import ConfigParser
 import os,sys
-sys.path.append("..")
-import check_mongo.search_mongo
+sys.path.append('/opt/xml_transfer/xml_listener_auto_process')
+#import check_mongo.search_mongo
+from check_mongo import search_mongo
 import time
 
 
@@ -48,7 +49,7 @@ def check_status(pre_offline_file, offline_file,online_file):
         searchid = next(get_sid)
         if searchid:
             print('searchid returned by func get_searchid',searchid)
-            res = search_mongo.check_status(searchid)
+            res = search_mongo.get_status(searchid)
             print('response of mongo',type(res),res)
         #time.sleep(30)
             vedio_statu = eval(str(res))['active']
@@ -62,7 +63,7 @@ def check_status(pre_offline_file, offline_file,online_file):
                 todo_file = offline_file
 
             with open(todo_file,'a') as f:
-                f.write(searchid)
+                f.write(searchid + '\n')
         else:
             print('We finished here!')
             print('*' * 20)
